@@ -91,3 +91,22 @@ export const getAllBooking = async (req, res) => {
     });
   }
 };
+
+export const getUserBooking = async (req, res) => {
+  const uid = req.user.id
+    try {
+    const books = await Booking.find({ userId: uid });
+    console.log(books)
+    
+    res.status(200).json({
+      success: true,
+      message: "successful",
+      data: books,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: true,
+      message: "internal server error",
+    });
+  }
+};
